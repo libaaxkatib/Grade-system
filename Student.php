@@ -10,5 +10,16 @@ class Student {
     public function getGrade() {
         return $this->grade;
     }
+    public function getResult(){
+    if ($this->grade >=90) {
+    return "A - Excellent";
+    } elseif ($this->grade >=80) {
+        return "B - Good";
+    } else {
+        return "F - Fail";
+    }
+   
+   } 
 }
+
 ?>
