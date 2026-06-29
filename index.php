@@ -2,9 +2,9 @@
 require 'Student.php';
 
 $student1= new Student('Asad', 95);
-$student2= new Student('Fadumo', 88);
+$grades = [95, 88, 72, 90, 85];
+$avg = $student1->getAverage($grades);
 
-echo $student1->name . " - " . $student1->getResult() . "<br>";
-echo $student2->name . " - " . $student2->getResult() . "<br>";
-
+echo $student1->name . "<br>";
+echo "Average: " . $avg . "<br>";
 ?>

@@ -20,6 +20,16 @@ class Student {
     }
    
    } 
+
+   public function getAverage($grades){
+    $total = 0;
+    foreach ($grades as $g) {
+        $total += $g;
+    }
+    return $total / count($grades);
+   }
 }
+
+
 
 ?>
