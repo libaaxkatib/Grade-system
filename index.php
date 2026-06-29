@@ -1,14 +1,10 @@
 <?php
-class Student {
-    public $name;
-    public $grade;
+require 'Student.php';
 
-    public function __construct($name, $grade)     {
-        $this->name = $name;
-        $this->grade = $grade;
-    }
-    public function getGrade() {
-        return $this->grade;
-    }
-}
+$student1= new Student('Asad', 95);
+$student2= new Student('Fadumo', 88);
+
+echo $student1->name . " - " . $student1->getGrade() . "<br>";
+echo $student2->name . " - " . $student2->getGrade() . "<br>";
+
 ?>
