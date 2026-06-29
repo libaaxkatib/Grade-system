@@ -9,6 +9,16 @@ $db->exec("
         grade INTEGER NOT NULL
     )
 ");
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['name']) && $_POST['name'] !== '') {
+        $name = $_POST['name'];
+        $grade = $_POST['grade'];
+        $stm = $db->prepare("INSERT INTO students (name, grade) VALUES (?, ?)");
+        $stm->execute([$name, $grade]);
+    }
+}
+
+$rows = $db->query("SELECT * FROM students ORDER BY grade DESC")->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +35,15 @@ $db->exec("
             <input type="number" name="grade" placeholder="Darajo (0-100)">
             <button type="submit">Ku dar</button>
         </form>
+    <?php foreach ($rows as $row): 
+    $student = new Student($row['name'], $row['grade']);
+?>
+    <div class="student-item">
+        <span><?= $student->name ?></span>
+        <span><?= $student->getGrade() ?></span>
+        <span><?= $student->getResult() ?></span>
+    </div>
+<?php endforeach; ?>    
     </div>
 </body>
 </html>
