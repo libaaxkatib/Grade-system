@@ -16,6 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stm = $db->prepare("INSERT INTO students (name, grade) VALUES (?, ?)");
         $stm->execute([$name, $grade]);
     }
+    if (isset($_POST['delete_id'])) {
+    $id = $_POST['delete_id'];
+    $stm = $db->prepare("DELETE FROM students WHERE id = ?");
+    $stm->execute([$id]);
+}
 }
 
 $rows = $db->query("SELECT * FROM students ORDER BY grade DESC")->fetchAll();
@@ -88,6 +93,20 @@ button {
     font-size: 15px;
     color: #333;
 }
+.delete-btn {
+    padding: 6px 14px;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.student-item form {
+    margin: 0;
+    padding: 0;
+}
     </style>
 </head>
 <body>
@@ -105,8 +124,12 @@ button {
         <span><?= $student->name ?></span>
         <span><?= $student->getGrade() ?></span>
         <span><?= $student->getResult() ?></span>
+        <form method="POST">
+            <input type="hidden" name="delete_id" value="<?= $row['id'] ?>">
+            <button type="submit" class="delete-btn">Tirtir</button>
+        </form>
     </div>
-<?php endforeach; ?>    
+<?php endforeach; ?>   
     </div>
 </body>
 </html>
